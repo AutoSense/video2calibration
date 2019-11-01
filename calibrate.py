@@ -24,7 +24,7 @@ if __name__ == '__main__':
         source = cv2.VideoCapture(args.input)
     # square_size = float(args.get('--square_size', 1.0))
 
-    pattern_size = (9, 6)
+    pattern_size = (8, 5)
     pattern_points = np.zeros((np.prod(pattern_size), 3), np.float32)
     pattern_points[:, :2] = np.indices(pattern_size).T.reshape(-1, 2)
     # pattern_points *= square_size
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 #        w, h = pickle.load(fr)
 
     print('\nPerforming calibration...')
-    rms, camera_matrix, dist_coefs, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, (w, h), None, None)
+    rms, camera_matrix, dist_coefs, rvecs, tvecs = cv2.calibrateCamera(obj_points, img_points, (w, h), None, None, flags= cv2.CALIB_FIX_K3)
     print "RMS:", rms
     print "camera matrix:\n", camera_matrix
     print "distortion coefficients: ", dist_coefs.ravel()
